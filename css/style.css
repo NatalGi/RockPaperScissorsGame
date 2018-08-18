@@ -2,29 +2,36 @@
   box-sizing: border-box;
 }
 
+body {
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+}
+
 .container {
   padding: 20px;
   margin: 0 auto;
   width: 100%;
-  text-align: center;
-  font-family: Helvetica, sans-serif;
 }
 
 .row {
   margin: 0;
   padding: 0;
 }
+
 .row::before, .row::after {
   content: "";
   display: table;
 }
+
 .row::after {
   clear: both;
 }
 
 .flex-display {
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
 }
 
 [class*="col-"] {
@@ -60,6 +67,7 @@
   border: 2px solid MediumSeaGreen;
   background-color: MediumSeaGreen;
 }
+
 .btn-green:hover, .btn-green:active {
   background-color: white;
   color: MediumSeaGreen;
@@ -69,6 +77,7 @@
   border: 2px solid Grey;
   background-color: Grey;
 }
+
 .btn-gray:hover, .btn-gray:active {
   background-color: white;
   color: Grey;
@@ -84,15 +93,18 @@
   font-weight: 600;
   text-transform: uppercase;
 }
+
 .scoreboard .header {
   padding: 8px;
   border-radius: 16px 16px 0 0;
   background-color: MediumSeaGreen;
   color: white;
 }
+
 .scoreboard .user-name {
   padding: 5px 10px;
 }
+
 .scoreboard .column {
   display: inline-block;
   float: left;
@@ -101,12 +113,81 @@
   margin: 0;
   border-top: 2px solid Grey;
 }
+
 .scoreboard .column .column-header {
   border-bottom: 2px solid Grey;
 }
+
 .scoreboard .column .score {
   font-size: 50px;
 }
+
 .scoreboard .left-column {
   border-right: 2px solid Grey;
 }
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.overlay.show {
+  display: block;
+}
+
+.modal {
+  display: none;
+  border: 2px solid MediumSeaGreen;
+  border-radius: 20px;
+  padding: 20px 0;
+  background-color: white;
+  width: 550px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.modal table {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.modal table tr {
+  border-bottom: 1px solid Grey;
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal .close {
+  position: absolute;
+  right: 6px;
+  top: 2px;
+  padding: 5px;
+  color: #000;
+  text-decoration: none;
+}
+
+.modal header {
+  border-bottom: 2px solid MediumSeaGreen;
+  font-size: 20px;
+  line-height: 30px;
+  min-height: 30px;
+  font-weight: bold;
+  padding: 0 30px;
+}
+
+.modal .content {
+  min-height: 30px;
+  max-height: 300px;
+  padding: 5px 30px;
+  overflow: auto;
+}
+/*# sourceMappingURL=style.css.map */

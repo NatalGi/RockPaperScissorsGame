@@ -5,12 +5,15 @@ $gray-color: Grey;
   box-sizing: border-box;
 }
 
+body {
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+}
+
 .container {
   padding: 20px;
   margin: 0 auto;
   width: 100%;
-  text-align: center;
-  font-family: Helvetica, sans-serif;
 }
 
 .row {
@@ -118,10 +121,75 @@ $gray-color: Grey;
       font-size: 50px;
     }
   }
+
   .left-column {
     border-right: 2px solid $gray-color;
+  }  
+} //scoreboard
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+
+  &.show {
+    display: block;
+  }
+}
+
+.modal {
+  display: none;
+  border: 2px solid $green-color;
+  border-radius: 20px;
+  padding: 20px 0;
+  background-color: white;
+  width: 550px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+
+  table {
+    margin-top: 20px;
+    width: 100%;
+
+    tr {
+      border-bottom: 1px solid $gray-color;
+    }
+  }
+
+  &.show {
+    display: block;
+  }
+
+  .close {
+    position: absolute;
+    right: 6px;
+    top: 2px;
+    padding: 5px;
+    color: #000;
+    text-decoration: none;
   }
   
-  
+  header {
+    border-bottom: 2px solid $green-color;
+    font-size: 20px;
+    line-height: 30px;
+    min-height: 30px;
+    font-weight: bold;
+    padding: 0 30px;
+  }
+
+  .content {
+    min-height: 30px;
+    max-height: 300px;
+    padding: 5px 30px;
+    overflow: auto;
+  }
 }
+
 
