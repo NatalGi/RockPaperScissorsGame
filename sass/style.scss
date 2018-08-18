@@ -1,0 +1,127 @@
+$green-color: MediumSeaGreen;
+$gray-color: Grey;
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 20px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+}
+
+.row {
+	margin: 0;
+	padding: 0;
+  
+  &::before, &::after {
+    content: "";
+    display: table;
+  }
+  
+  &::after {
+    clear: both;
+  }
+}
+
+.flex-display {
+  display: flex;
+  justify-content: center;
+}
+
+[class*="col-"] {
+	float: left;
+	min-height: 1px;
+	position: relative;
+}
+
+.col-small {
+  width: 20%;
+}
+
+.col-med {
+  width: 60%;
+}
+
+.col-big {
+  width: 100%;
+}
+
+.button {
+  margin: 0 10px 20px 10px;
+  padding: 20px 50px;  
+  border-radius: 5px;  
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: 0;  
+}
+
+.btn-green {
+  border: 2px solid $green-color;
+  background-color: $green-color;
+  
+  &:hover, &:active {
+    background-color: white;
+    color: $green-color;
+  }
+}
+
+.btn-gray {
+  border: 2px solid $gray-color;
+  background-color: $gray-color;
+  
+  &:hover, &:active {
+    background-color: white;
+    color: $gray-color;
+  }
+}
+
+.scoreboard {
+  border: 2px solid $green-color;
+  border-radius: 20px;
+  background-color: white;
+  height: 120px;
+  width: 200px;
+  
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  
+  .header {
+    padding: 8px;
+    border-radius: 16px 16px 0 0;
+    background-color: $green-color;
+    color: white;
+  }  
+  .user-name {
+    padding: 5px 10px;
+  }
+  
+  .column {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    height: 72%;
+    margin: 0;
+    border-top: 2px solid $gray-color;  
+    
+    .column-header {
+      border-bottom: 2px solid $gray-color;
+    }
+    
+    .score {
+      font-size: 50px;
+    }
+  }
+  .left-column {
+    border-right: 2px solid $gray-color;
+  }
+  
+  
+}
+

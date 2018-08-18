@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 20px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+}
+.row::before, .row::after {
+  content: "";
+  display: table;
+}
+.row::after {
+  clear: both;
+}
+
+.flex-display {
+  display: flex;
+  justify-content: center;
+}
+
+[class*="col-"] {
+  float: left;
+  min-height: 1px;
+  position: relative;
+}
+
+.col-small {
+  width: 20%;
+}
+
+.col-med {
+  width: 60%;
+}
+
+.col-big {
+  width: 100%;
+}
+
+.button {
+  margin: 0 10px 20px 10px;
+  padding: 20px 50px;
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: 0;
+}
+
+.btn-green {
+  border: 2px solid MediumSeaGreen;
+  background-color: MediumSeaGreen;
+}
+.btn-green:hover, .btn-green:active {
+  background-color: white;
+  color: MediumSeaGreen;
+}
+
+.btn-gray {
+  border: 2px solid Grey;
+  background-color: Grey;
+}
+.btn-gray:hover, .btn-gray:active {
+  background-color: white;
+  color: Grey;
+}
+
+.scoreboard {
+  border: 2px solid MediumSeaGreen;
+  border-radius: 20px;
+  background-color: white;
+  height: 120px;
+  width: 200px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.scoreboard .header {
+  padding: 8px;
+  border-radius: 16px 16px 0 0;
+  background-color: MediumSeaGreen;
+  color: white;
+}
+.scoreboard .user-name {
+  padding: 5px 10px;
+}
+.scoreboard .column {
+  display: inline-block;
+  float: left;
+  width: 50%;
+  height: 72%;
+  margin: 0;
+  border-top: 2px solid Grey;
+}
+.scoreboard .column .column-header {
+  border-bottom: 2px solid Grey;
+}
+.scoreboard .column .score {
+  font-size: 50px;
+}
+.scoreboard .left-column {
+  border-right: 2px solid Grey;
+}
