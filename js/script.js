@@ -3,7 +3,6 @@
 //Gra użytkownika z "komputerem" w "Kamień, papier, nożyczki".
 
 (function () {
-
   var htmlElements = {
     output: document.getElementById('output'),
 
@@ -13,11 +12,14 @@
     infoOutput: document.getElementById('info-output'),
 
     overlay: document.getElementById('modal-overlay'),
-    modals: document.getElementsByClassName('modal')
+    modals: document.getElementsByClassName('modal'),
+
+    submitButton: document.getElementById('submit-btn')
   };
 
   var params = {
     game: false,
+    playerName: 'Użytkownik',
     roundNumber: 0,
     roundCounter: 0,
     playerScore: 0,
@@ -25,6 +27,7 @@
     progress: []
   };
 
+  //Obsługa przycisków zamykających modale.
   var closeModalButtons = document.querySelectorAll('.modal .close');
   for(var i = 0; i < closeModalButtons.length; i++) {
     closeModalButtons[i].addEventListener('click', modalClose);
@@ -63,7 +66,14 @@
 
   //Funkcja reagująca na zdarzenie kliknięcia na przycisk "Nowa gra". Funkcja wyświetla okienko do wprowadzenia ilości rund w rozgrywkach i przeprowadza walidację danych wprowadzonych przez użytkownika.
   htmlElements.newGameButton.addEventListener('click', function(event) {
-    var roundNumber = window.prompt('Podaj liczbę rund w rozgrywkach');
+    //var roundNumber = window.prompt('Podaj liczbę rund w rozgrywkach');
+    modalShow('modal-new-game');
+  });
+
+  htmlElements.submitButton.addEventListener('click', function(event) {
+    modalClose(event);
+    var name = document.getElementById("user-name").value;
+    var roundNumber  = document.getElementById("round-num").value;  
     
     if (!roundNumber || isNaN(roundNumber) || roundNumber == null) {
       params.roundNumber = 0;
@@ -72,9 +82,17 @@
     else {
       params.roundNumber = roundNumber;
       infoLog('Ilość rund w rozgrywkach: ' + params.roundNumber);
+      if(name && name != null) {
+        params.playerName = name;
+        document.getElementById('player-name').innerHTML = name;
+      }
       params.game = true;
     }
   });
+
+  function newGame() {
+    
+  };
 
   //Funkcja wyświetlająca komunikaty dotyczące przebiegu gry w okienku pod przyciskami "KAMIEŃ", "PAPIER", "NOŻYCZKI".
   function gameLog(message) {
@@ -120,7 +138,7 @@
         message = 'Rozgrywki zakończone remisem';
       }
       gameLog(message);
-      message +='<table><tr><th>Nr rundy</th><th>Ruch gracza</th><th>Ruch komp.</th><th>Zwycięzca</th><th>Wynik</th></tr>';
+      message +='<table><tr><th>Nr rundy</th><th>' + params.playerName + '</th><th>Komputer</th><th>Zwycięzca</th><th>Wynik</th></tr>';
 
       for (var i = 0; i < params.progress.length; i++) {
         message += '<tr>';
@@ -137,8 +155,8 @@
 
       message += '</table>'
 
-      document.querySelector('#modal-one .content p').innerHTML = message;      
-      modalShow('modal-one');
+      document.querySelector('#modal-end-game .content p').innerHTML = message;      
+      modalShow('modal-end-game');
       
       params.roundCounter = 0;
       params.roundNumber = 0;
@@ -157,7 +175,7 @@
         return 'Komputer';
       }
       else if(winner == 1) { //Wygrał użytkownik
-        return 'Użytkownik';        
+        return params.playerName;        
       }
       else if (winner == -1) {
         return 'Remis';
@@ -214,7 +232,7 @@
         message = 'REMIS: ';
       }
 
-      message += 'ty wybrałeś ' + choiceToString(playerChoice) + ', komputer wybrał ' + choiceToString(computerChoice);
+      message += params.playerName + ' wybrał ' + choiceToString(playerChoice) + ', komputer wybrał ' + choiceToString(computerChoice);
       gameLog(message);
       updateScore();
       params.progress[params.roundCounter] = {

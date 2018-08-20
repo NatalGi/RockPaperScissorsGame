@@ -84,6 +84,19 @@ body {
   }
 }
 
+label {
+  font-size: 15px;
+  color: $gray-color;
+  text-align: left;
+}
+
+input {
+  border: 2px solid $green-color;
+  border-radius: 5px;  
+  padding: 10px;
+  margin: 5px 0 20px 0;
+}
+
 .scoreboard {
   border: 2px solid $green-color;
   border-radius: 20px;
@@ -115,6 +128,8 @@ body {
     
     .column-header {
       border-bottom: 2px solid $gray-color;
+      font-size: 13px;
+      padding: 4px 0;
     }
     
     .score {
@@ -147,11 +162,18 @@ body {
   border-radius: 20px;
   padding: 20px 0;
   background-color: white;
-  width: 550px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
+
+  &#modal-new-game {
+    width: 400px;
+  }
+
+  &#modal-end-game {
+    width: 550px;
+  }
 
   table {
     margin-top: 20px;
@@ -187,8 +209,23 @@ body {
   .content {
     min-height: 30px;
     max-height: 300px;
-    padding: 5px 30px;
+    padding: 20px 30px;
     overflow: auto;
+
+    .form-container {
+      width: 70%;
+      margin: 0 auto;
+      text-align: left;
+
+      .button {
+        width: 100%;
+        margin: 5px 0;
+      }
+
+      input {
+        width: 100%;
+      }
+    }    
   }
 }
 

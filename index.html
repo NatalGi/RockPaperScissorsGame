@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Zad.8.4</title>  
     <link rel="stylesheet" href="css/style.css">  
+
   </head>
 
   <body>
@@ -42,11 +43,11 @@
           <div id="scoreboard" class="scoreboard">
           <div class="header">wyniki</div>
           <div class="column left-column">
-            <div class="column-header">ty</div>
+            <div id="player-name" class="column-header">użytkownik</div>
             <div id="player-score" class="score">0</div>
           </div>
           <div class="column">
-            <div class="column-header">komp.</div>
+            <div class="column-header">komputer</div>
             <div id="computer-score" class="score">0</div>
           </div>
         </div>
@@ -55,15 +56,28 @@
     </div>
 
     <div class="overlay" id="modal-overlay">
-      <div class="modal" id="modal-one">
+      <div class="modal" id="modal-end-game">
         <a href="#" class="close">x</a>
         <header>GRA ZAKOŃCZONA</header>
         <div class="content">
           <p></p>
         </div>
       </div>
+      <div class="modal" id="modal-new-game">
+        <a href="#" class="close">x</a>
+        <header>NOWA GRA</header>
+        <div class="content">
+            <div class="form-container">
+              <label for="user-name">Imię</label><br>
+              <input type="text" id="user-name" name="user-name" maxlength="10"><br>
+              <label for="round-num">Ilość rund w rozgrywkach</label><br>
+              <input type="number" id="round-num" name="round-num"><br>
+              <button class="button btn-green" id="submit-btn">Start</button>
+            </div>
+        </div>
+      </div>
     </div>    
 
-    <script  src="js/script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

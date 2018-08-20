@@ -83,6 +83,19 @@ body {
   color: Grey;
 }
 
+label {
+  font-size: 15px;
+  color: Grey;
+  text-align: left;
+}
+
+input {
+  border: 2px solid MediumSeaGreen;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0 20px 0;
+}
+
 .scoreboard {
   border: 2px solid MediumSeaGreen;
   border-radius: 20px;
@@ -116,6 +129,8 @@ body {
 
 .scoreboard .column .column-header {
   border-bottom: 2px solid Grey;
+  font-size: 13px;
+  padding: 4px 0;
 }
 
 .scoreboard .column .score {
@@ -146,11 +161,18 @@ body {
   border-radius: 20px;
   padding: 20px 0;
   background-color: white;
-  width: 550px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
+}
+
+.modal#modal-new-game {
+  width: 400px;
+}
+
+.modal#modal-end-game {
+  width: 550px;
 }
 
 .modal table {
@@ -187,7 +209,22 @@ body {
 .modal .content {
   min-height: 30px;
   max-height: 300px;
-  padding: 5px 30px;
+  padding: 20px 30px;
   overflow: auto;
+}
+
+.modal .content .form-container {
+  width: 70%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.modal .content .form-container .button {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.modal .content .form-container input {
+  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */
