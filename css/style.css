@@ -96,6 +96,10 @@ input {
   margin: 5px 0 20px 0;
 }
 
+input.light {
+  background-color: red;
+}
+
 .scoreboard {
   border: 2px solid MediumSeaGreen;
   border-radius: 20px;

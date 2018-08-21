@@ -14,6 +14,8 @@
     overlay: document.getElementById('modal-overlay'),
     modals: document.getElementsByClassName('modal'),
 
+    nameInput: document.getElementById('user-name'),
+    roundInput: document.getElementById('round-num'),
     submitButton: document.getElementById('submit-btn')
   };
 
@@ -70,29 +72,53 @@
     modalShow('modal-new-game');
   });
 
-  htmlElements.submitButton.addEventListener('click', function(event) {
-    modalClose(event);
-    var name = document.getElementById("user-name").value;
-    var roundNumber  = document.getElementById("round-num").value;  
-    
-    if (!roundNumber || isNaN(roundNumber) || roundNumber == null) {
-      params.roundNumber = 0;
-      infoLog('Niepoprawna ilość rund');
-    }
-    else {
-      params.roundNumber = roundNumber;
-      infoLog('Ilość rund w rozgrywkach: ' + params.roundNumber);
-      if(name && name != null) {
-        params.playerName = name;
-        document.getElementById('player-name').innerHTML = name;
-      }
-      params.game = true;
+  //Obsługa klawisza "Enter" (jako naciśnięcie przycisku "Start") w modalu "Nowa gra".
+  document.getElementById('modal-new-game').addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      document.getElementById("submit-btn").click();
     }
   });
 
-  function newGame() {
-    
-  };
+  //Funkcja pobierająca imię użytkownika oraz ilość rund w rozgrywkach i rozpoczynająca nową rozgrywkę.
+  htmlElements.submitButton.addEventListener('click', function(event) {    
+    var name = document.getElementById("user-name").value;
+    var roundNumber  = document.getElementById("round-num").value; 
+    var errors = false;
+
+    if(!name || name == '' || name == null) {
+      htmlElements.nameInput.classList.add('light');
+      errors = true;
+    }
+
+    if (!roundNumber || isNaN(roundNumber) || roundNumber == null) {
+      htmlElements.roundInput.classList.add('light');
+      errors = true;
+    }
+
+    if(!errors) {
+      modalClose(event);
+      gameReset();
+      updateScore();
+      params.roundNumber = roundNumber;
+      params.playerName = name;
+      document.getElementById('player-name').innerHTML = name;
+      infoLog('Runda  ' + (params.roundCounter+1) + ' z ' + params.roundNumber);
+      params.game = true;
+      gameLog('');
+    }
+  });
+
+  //Usunięcie podświetlenia z elementów <input> user-name i <input> round-num.
+  htmlElements.nameInput.addEventListener('focus', function(event) {
+    event.preventDefault();
+    htmlElements.nameInput.classList.remove('light');
+  });
+
+  htmlElements.roundInput.addEventListener('focus', function(event) {
+    event.preventDefault();
+    htmlElements.roundInput.classList.remove('light');
+  });
 
   //Funkcja wyświetlająca komunikaty dotyczące przebiegu gry w okienku pod przyciskami "KAMIEŃ", "PAPIER", "NOŻYCZKI".
   function gameLog(message) {
@@ -105,7 +131,7 @@
     return Math.floor(Math.random() * 3 + 1);
   };
 
-  //Funckja zwracająca nazwę dla liczby z przedziału <1;3>
+  //Funkcja zwracająca nazwę dla liczby z przedziału <1;3>
   function choiceToString(choice) {
     if(choice == 1) {
       return 'KAMIEŃ';
@@ -123,6 +149,15 @@
     htmlElements.playerScore.innerHTML = params.playerScore;
     htmlElements.computerScore.innerHTML = params.computerScore;
   }
+
+  //Funkcja resetująca ustawienia gry.
+  function gameReset() {
+    params.roundCounter = 0;
+    params.roundNumber = 0;
+    params.playerScore = 0;
+    params.computerScore = 0;
+    params.progress = [];
+  };
 
   //Funkcja sprawdzająca status gry - czy rozegrano podaną ilość rund. W przypadku osiągnięcia wymaganej ilości rund wyświetla komunikat o wyniku rozgrywek oraz zeruje wartości zmiennych do nowej rozgrywki.
   function checkGameStatus() {
@@ -157,14 +192,11 @@
 
       document.querySelector('#modal-end-game .content p').innerHTML = message;      
       modalShow('modal-end-game');
-      
-      params.roundCounter = 0;
-      params.roundNumber = 0;
-      params.playerScore = 0;
-      params.computerScore = 0;
+      infoLog('Rozegrano ' + params.roundNumber + ' rund');
       return false;
     }
     else {
+      infoLog('Runda  ' + (params.roundCounter+1) + ' z ' + params.roundNumber);
       return true;
     }
   };
@@ -233,7 +265,7 @@
       }
 
       message += params.playerName + ' wybrał ' + choiceToString(playerChoice) + ', komputer wybrał ' + choiceToString(computerChoice);
-      gameLog(message);
+      gameLog(message);      
       updateScore();
       params.progress[params.roundCounter] = {
         'roundNumber': params.roundCounter+1, 
@@ -242,7 +274,7 @@
         'winner': whoWon(winner),
         'roundScore': [params.playerScore, params.computerScore]
       };
-      params.roundCounter++;
+      params.roundCounter++;      
       params.game = checkGameStatus();
     }
   };
